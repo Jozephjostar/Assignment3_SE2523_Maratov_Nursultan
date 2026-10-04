@@ -26,11 +26,11 @@
 
 ## 2. Key Method & Field Locations
 
-- **Bridge Reference Field:** `protected Renderer renderer` in [`src/Shape.java`](file:///Users/nursultanmaratov/.gemini/antigravity/scratch/Assignment3_SE2523_Maratov_Nursultan/src/Shape.java#L3).
-- **Bridge Constructor Injection:** `public Shape(String id, Renderer renderer)` in [`src/Shape.java`](file:///Users/nursultanmaratov/.gemini/antigravity/scratch/Assignment3_SE2523_Maratov_Nursultan/src/Shape.java#L5-L14).
-- **Execution Operation:** `public abstract String execute()` in [`src/Shape.java`](file:///Users/nursultanmaratov/.gemini/antigravity/scratch/Assignment3_SE2523_Maratov_Nursultan/src/Shape.java#L28), implemented in `Circle.java` (delegates to `renderer.renderCircle(radius)`) and `Square.java` (delegates to `renderer.renderSquare(side)`).
-- **Runtime Switch Method:** `public void setImplementation(Renderer renderer)` in [`src/Shape.java`](file:///Users/nursultanmaratov/.gemini/antigravity/scratch/Assignment3_SE2523_Maratov_Nursultan/src/Shape.java#L21-L26).
-- **T5 Demonstration Check:** Located in [`src/Main.java`](file:///Users/nursultanmaratov/.gemini/antigravity/scratch/Assignment3_SE2523_Maratov_Nursultan/src/Main.java#L59-L86). It creates a `Circle` with `VectorRenderer`, captures reference equality (`refBefore == refAfter`), verifies domain data persistence (`id` and `radius`), switches the implementor at runtime via `setImplementation(new RasterRenderer())`, and executes again.
+- **Bridge Reference Field:** `protected Renderer renderer` in [`src/Shape.java`](src/Shape.java).
+- **Bridge Constructor Injection:** `public Shape(String id, Renderer renderer)` in [`src/Shape.java`](src/Shape.java).
+- **Execution Operation:** `public abstract String execute()` in [`src/Shape.java`](src/Shape.java), implemented in `Circle` and `Square`.
+- **Runtime Switch Method:** `public void setImplementation(Renderer renderer)` in [`src/Shape.java`](src/Shape.java).
+- **T5 Demonstration Check:** Located in [`src/Main.java`](src/Main.java). Demonstrates runtime replacement using `setImplementation` and tests reference equality `==`.
 
 ---
 
