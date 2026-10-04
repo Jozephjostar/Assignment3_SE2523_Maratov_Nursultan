@@ -10,7 +10,7 @@ public class Main {
 
     public static void runDemo() {
         int passed = 0;
-        int total = 5;
+        int total = 7;
 
         // T1: Circle with VectorRenderer
         Circle c1 = new Circle("c-1", new VectorRenderer(), 2);
@@ -83,6 +83,28 @@ public class Main {
         } else {
             System.out.println("T5 FAIL | sameObject=" + sameObject + " | stateUnchanged=" + stateUnchanged);
             System.out.println("  before=" + resultBefore + " | after=" + resultAfter);
+        }
+
+        // T6: Circle with new AsciiRenderer (I3)
+        Circle c3 = new Circle("c-3", new AsciiRenderer(), 2);
+        String actualT6 = c3.execute();
+        String expectedT6 = "ASCII circle radius=2";
+        if (expectedT6.equals(actualT6)) {
+            passed++;
+            System.out.println("T6 PASS | Circle + AsciiRenderer | result=" + actualT6);
+        } else {
+            System.out.println("T6 FAIL | Circle + AsciiRenderer | expected=" + expectedT6 + " | actual=" + actualT6);
+        }
+
+        // T7: Square with new AsciiRenderer (I3)
+        Square s3 = new Square("s-3", new AsciiRenderer(), 3);
+        String actualT7 = s3.execute();
+        String expectedT7 = "ASCII square side=3";
+        if (expectedT7.equals(actualT7)) {
+            passed++;
+            System.out.println("T7 PASS | Square + AsciiRenderer | result=" + actualT7);
+        } else {
+            System.out.println("T7 FAIL | Square + AsciiRenderer | expected=" + expectedT7 + " | actual=" + actualT7);
         }
 
         System.out.println("SUMMARY: " + passed + "/" + total + " PASS");
