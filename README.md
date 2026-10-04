@@ -5,7 +5,7 @@
 - **Topic:** Option A (Drawing: Shapes & Renderers)
 - **Repository URL:** https://github.com/nursultanmaratov/Assignment3-BridgePattern
 - **Base Commit Hash:** `895e20deebecdbd391cb705f5a81309343ce0c4f`
-- **Submitted Commit Hash:** `62d26f74a0c8faec3f1366579e40e0be0e5ce6c9`
+- **Submitted Commit Hash:** `b61c1286b4725019e50cde8c39cfe0c00ca1ab38`
 
 ---
 
