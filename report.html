@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 3 Report — Bridge Pattern</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm 14mm 12mm 14mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      font-size: 11px;
+      line-height: 1.4;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+    .header {
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+    .univ-title {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      margin: 0 0 2px 0;
+    }
+    .course-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #2563eb;
+      margin: 0 0 3px 0;
+    }
+    h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 6px 0;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+    .meta-item strong {
+      color: #334155;
+    }
+    h2 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #1e3a8a;
+      border-left: 3px solid #2563eb;
+      padding-left: 6px;
+      margin: 10px 0 5px 0;
+    }
+    h3 {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 7px 0 3px 0;
+    }
+    p {
+      margin: 0 0 5px 0;
+      text-align: justify;
+    }
+    .uml-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 4px;
+      background: #ffffff;
+      margin: 6px 0 6px 0;
+      text-align: center;
+    }
+    .uml-box svg {
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+    }
+    .code-box {
+      background: #0f172a;
+      color: #f1f5f9;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 9.5px;
+      line-height: 1.3;
+      margin: 3px 0 4px 0;
+      white-space: pre-wrap;
+    }
+    .excerpt-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 5px 8px;
+      margin-bottom: 5px;
+    }
+    .excerpt-title {
+      font-weight: 700;
+      color: #1e3a8a;
+      font-size: 10.5px;
+      margin-bottom: 2px;
+    }
+    .benefit {
+      color: #047857;
+      font-size: 10px;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5px;
+      margin: 5px 0 6px 0;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 3.5px 6px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+    }
+    .badge {
+      display: inline-block;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: 700;
+    }
+    .badge-pass {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    ul, ol {
+      margin: 2px 0 5px 16px;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="header">
+    <div class="univ-title">Astana IT University • School of Software Engineering</div>
+    <div class="course-title">Course: ShP-2216 Software Design Patterns | Yerassyl Bekenov | Year 2, Trimester 4</div>
+    <h1>Assignment 3: Bridge Pattern Laboratory Report</h1>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-item"><strong>Student Name:</strong> Nursultan Maratov</div>
+    <div class="meta-item"><strong>Student Group:</strong> SE-2523 (6B06102)</div>
+    <div class="meta-item"><strong>Chosen Topic:</strong> Option A (Drawing: Shapes &amp; Renderers)</div>
+    <div class="meta-item"><strong>Language &amp; Target:</strong> Java 17 (Pure JDK, no external dependencies)</div>
+    <div class="meta-item"><strong>GitHub Repository:</strong> <a href="https://github.com/nursultanmaratov/Assignment3-BridgePattern">github.com/nursultanmaratov/Assignment3-BridgePattern</a></div>
+    <div class="meta-item"><strong>Base Commit Hash:</strong> <code>895e20deebecdbd391cb705f5a81309343ce0c4f</code></div>
+    <div class="meta-item"><strong>Submitted Commit Hash:</strong> <code>62d26f74a0c8faec3f1366579e40e0be0e5ce6c9</code></div>
+    <div class="meta-item"><strong>Verification Status:</strong> 7/7 Demonstration Checks PASSED</div>
+  </div>
+
+  <h2>1. Problem Definition &amp; Bridge Pattern Rationale</h2>
+  <p>
+    In object-oriented design, when an abstraction has multiple possible implementations, using naive inheritance tightly couples them. For instance, subclassing shapes directly by rendering type (e.g., <code>VectorCircle</code>, <code>RasterCircle</code>, <code>VectorSquare</code>, <code>RasterSquare</code>) causes a <em>combinatorial explosion</em> of classes (<i>M</i> &times; <i>N</i>, where <i>M</i> is the number of shapes and <i>N</i> is the number of rendering backends). Adding a third renderer requires creating subclasses for every shape.
+  </p>
+  <p>
+    The <strong>Bridge Pattern</strong> decouples this system into two orthogonal hierarchies linked via object composition:
+  </p>
+  <ul>
+    <li><strong>Abstraction Dimension:</strong> High-level domain entities (<code>Shape</code>, <code>Circle</code>, <code>Square</code>) holding domain attributes (<code>id</code>, <code>radius</code>, <code>side</code>).</li>
+    <li><strong>Implementation Dimension:</strong> Low-level graphics operations (<code>Renderer</code> interface, <code>VectorRenderer</code>, <code>RasterRenderer</code>, <code>AsciiRenderer</code>).</li>
+  </ul>
+  <p>
+    By replacing inheritance with composition (the bridge reference <code>protected Renderer renderer</code>), the class count scales linearly as <i>M</i> + <i>N</i>. Crucially, it allows runtime replacement of the renderer on the same shape object via <code>setImplementation(...)</code> without altering object identity or domain data.
+  </p>
+
+  <h2>2. Complete UML Class Diagram</h2>
+  <p>
+    The diagram below models the final codebase, illustrating both hierarchies, all three implementors, the client, and the interface-typed bridge link.
+  </p>
+  
+  <div class="uml-box">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" width="100%" height="auto" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+      <defs>
+        <marker id="inheritance" markerWidth="14" markerHeight="14" refX="14" refY="7" orient="auto">
+          <polygon points="0 0, 14 7, 0 14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" />
+        </marker>
+        <marker id="realization" markerWidth="14" markerHeight="14" refX="14" refY="7" orient="auto">
+          <polygon points="0 0, 14 7, 0 14" fill="#ffffff" stroke="#059669" stroke-width="1.5" />
+        </marker>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 1, 9 5, 0 9" fill="#1e293b" />
+        </marker>
+        <marker id="dep-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0 1, 7 4, 0 7" fill="#64748b" />
+        </marker>
+        <marker id="diamond" markerWidth="16" markerHeight="12" refX="0" refY="6" orient="auto">
+          <polygon points="0 6, 8 1, 16 6, 8 11" fill="#1e293b" stroke="#1e293b" stroke-width="1" />
+        </marker>
+      </defs>
+
+      <rect x="15" y="10" width="950" height="34" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+      <text x="30" y="32" font-size="13" font-weight="bold" fill="#0f172a">Bridge Pattern Class Diagram — Option A (Drawing)</text>
+      <text x="680" y="32" font-size="11.5" fill="#64748b">Astana IT University | SE-2523 | Nursultan Maratov</text>
+
+      <!-- Client: Main -->
+      <g transform="translate(15, 60)">
+        <rect width="160" height="95" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" />
+        <path d="M 0 28 L 160 28" stroke="#cbd5e1" stroke-width="1" />
+        <text x="80" y="20" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Main</text>
+        <text x="10" y="46" font-size="10" fill="#475569">+ main(args: String[]): void</text>
+        <text x="10" y="65" font-size="10" fill="#475569">+ runDemo(): void</text>
+        <text x="10" y="84" font-size="9" font-style="italic" fill="#64748b">«Client / Test Runner»</text>
+      </g>
+
+      <!-- Abstraction: Shape -->
+      <g transform="translate(225, 60)">
+        <rect width="250" height="145" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" />
+        <path d="M 0 34 L 250 34" stroke="#bfdbfe" stroke-width="1" />
+        <path d="M 0 72 L 250 72" stroke="#bfdbfe" stroke-width="1" />
+        <text x="125" y="17" font-size="9.5" font-style="italic" fill="#2563eb" text-anchor="middle">&lt;&lt;abstract&gt;&gt;</text>
+        <text x="125" y="30" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Shape</text>
+        <text x="12" y="50" font-size="10.5" fill="#334155"># id: String</text>
+        <text x="12" y="65" font-size="10.5" fill="#334155"># renderer: Renderer</text>
+        <text x="12" y="88" font-size="10" fill="#334155">+ Shape(id: String, r: Renderer)</text>
+        <text x="12" y="103" font-size="10" fill="#334155">+ setImplementation(r: Renderer): void</text>
+        <text x="12" y="118" font-size="10" fill="#334155">+ getId(): String</text>
+        <text x="12" y="133" font-size="10" font-style="italic" font-weight="bold" fill="#1d4ed8">+ {abstract} execute(): String</text>
+      </g>
+
+      <!-- Implementor: Renderer -->
+      <g transform="translate(560, 60)">
+        <rect width="270" height="100" rx="5" fill="#ecfdf5" stroke="#059669" stroke-width="1.5" />
+        <path d="M 0 34 L 270 34" stroke="#a7f3d0" stroke-width="1" />
+        <text x="135" y="17" font-size="9.5" font-style="italic" fill="#059669" text-anchor="middle">&lt;&lt;interface&gt;&gt;</text>
+        <text x="135" y="30" font-size="12" font-weight="bold" fill="#065f46" text-anchor="middle">Renderer</text>
+        <text x="12" y="55" font-size="10.5" fill="#065f46">+ renderCircle(radius: int): String</text>
+        <text x="12" y="75" font-size="10.5" fill="#065f46">+ renderSquare(side: int): String</text>
+        <text x="12" y="92" font-size="9" font-style="italic" fill="#047857">«Implementor Interface»</text>
+      </g>
+
+      <!-- Bridge Association -->
+      <line x1="475" y1="110" x2="558" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)" marker-start="url(#diamond)" />
+      <text x="517" y="102" font-size="10.5" font-weight="bold" fill="#1e293b" text-anchor="middle">renderer</text>
+      <text x="517" y="125" font-size="9" fill="#64748b" text-anchor="middle">&lt;&lt;Bridge&gt;&gt;</text>
+
+      <!-- Dependency: Main -> Shape -->
+      <path d="M 175 110 L 223 110" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#dep-arrow)" />
+
+      <!-- Refined Abstractions -->
+      <g transform="translate(210, 265)">
+        <rect width="135" height="115" rx="5" fill="#f8fafc" stroke="#2563eb" stroke-width="1.2" />
+        <path d="M 0 28 L 135 28" stroke="#bfdbfe" stroke-width="1" />
+        <path d="M 0 50 L 135 50" stroke="#bfdbfe" stroke-width="1" />
+        <text x="67" y="19" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Circle (A1)</text>
+        <text x="10" y="42" font-size="10.5" fill="#334155">- radius: int</text>
+        <text x="10" y="66" font-size="9.5" fill="#334155">+ Circle(id, r, radius)</text>
+        <text x="10" y="82" font-size="9.5" fill="#334155">+ getRadius(): int</text>
+        <text x="10" y="100" font-size="9.5" font-weight="bold" fill="#1d4ed8">+ execute(): String</text>
+      </g>
+
+      <g transform="translate(365, 265)">
+        <rect width="135" height="115" rx="5" fill="#f8fafc" stroke="#2563eb" stroke-width="1.2" />
+        <path d="M 0 28 L 135 28" stroke="#bfdbfe" stroke-width="1" />
+        <path d="M 0 50 L 135 50" stroke="#bfdbfe" stroke-width="1" />
+        <text x="67" y="19" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Square (A2)</text>
+        <text x="10" y="42" font-size="10.5" fill="#334155">- side: int</text>
+        <text x="10" y="66" font-size="9.5" fill="#334155">+ Square(id, r, side)</text>
+        <text x="10" y="82" font-size="9.5" fill="#334155">+ getSide(): int</text>
+        <text x="10" y="100" font-size="9.5" font-weight="bold" fill="#1d4ed8">+ execute(): String</text>
+      </g>
+
+      <path d="M 277 265 L 277 225 L 350 225 L 350 207" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#inheritance)" />
+      <path d="M 432 265 L 432 225 L 350 225" stroke="#2563eb" stroke-width="1.5" fill="none" />
+
+      <!-- Concrete Implementors -->
+      <g transform="translate(540, 265)">
+        <rect width="128" height="100" rx="5" fill="#f8fafc" stroke="#059669" stroke-width="1.2" />
+        <path d="M 0 28 L 128 28" stroke="#cbd5e1" stroke-width="1" />
+        <text x="64" y="16" font-size="10.5" font-weight="bold" fill="#047857" text-anchor="middle">VectorRenderer</text>
+        <text x="64" y="26" font-size="8.5" fill="#059669" text-anchor="middle">(I1)</text>
+        <text x="6" y="50" font-size="9.5" fill="#334155">+ renderCircle(): Str</text>
+        <text x="6" y="70" font-size="9.5" fill="#334155">+ renderSquare(): Str</text>
+      </g>
+
+      <g transform="translate(685, 265)">
+        <rect width="128" height="100" rx="5" fill="#f8fafc" stroke="#059669" stroke-width="1.2" />
+        <path d="M 0 28 L 128 28" stroke="#cbd5e1" stroke-width="1" />
+        <text x="64" y="16" font-size="10.5" font-weight="bold" fill="#047857" text-anchor="middle">RasterRenderer</text>
+        <text x="64" y="26" font-size="8.5" fill="#059669" text-anchor="middle">(I2)</text>
+        <text x="6" y="50" font-size="9.5" fill="#334155">+ renderCircle(): Str</text>
+        <text x="6" y="70" font-size="9.5" fill="#334155">+ renderSquare(): Str</text>
+      </g>
+
+      <g transform="translate(830, 265)">
+        <rect width="135" height="100" rx="5" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,2" />
+        <path d="M 0 28 L 135 28" stroke="#fef08a" stroke-width="1" />
+        <text x="67" y="16" font-size="10.5" font-weight="bold" fill="#a16207" text-anchor="middle">AsciiRenderer</text>
+        <text x="67" y="26" font-size="8.5" fill="#ca8a04" text-anchor="middle">(I3 Extension)</text>
+        <text x="6" y="50" font-size="9.5" fill="#334155">+ renderCircle(): Str</text>
+        <text x="6" y="70" font-size="9.5" fill="#334155">+ renderSquare(): Str</text>
+      </g>
+
+      <path d="M 604 265 L 604 205 L 695 205 L 695 162" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#realization)" />
+      <path d="M 749 265 L 749 205" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3" fill="none" />
+      <path d="M 897 265 L 897 205 L 695 205" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,3" fill="none" />
+    </svg>
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page-break"></div>
+
+  <h2>3. Five Annotated Clean Code Excerpts</h2>
+  <p>
+    The codebase reflects Clean Code best practices (Martin, 2008), maximizing maintainability and clarity:
+  </p>
+
+  <div class="excerpt-card">
+    <div class="excerpt-title">Excerpt 1: Separation of Responsibilities (Single Responsibility Principle)</div>
+    <div class="code-box">// In src/Circle.java
+@Override
+public String execute() {
+    return renderer.renderCircle(radius);
+}</div>
+    <div class="benefit">
+      <strong>Benefit:</strong> <code>Circle</code> is strictly responsible for managing circle data (radius), while drawing operations (pixels, vectors, or ASCII) are isolated in <code>Renderer</code> implementations.
+    </div>
+  </div>
+
+  <div class="excerpt-card">
+    <div class="excerpt-title">Excerpt 2: Meaningful Names</div>
+    <div class="code-box">// In src/Renderer.java and src/VectorRenderer.java
+public interface Renderer {
+    String renderCircle(int radius);
+    String renderSquare(int side);
+}</div>
+    <div class="benefit">
+      <strong>Benefit:</strong> Descriptive names (<code>renderCircle</code>, <code>VectorRenderer</code>, <code>setImplementation</code>) clearly communicate intent without ambiguous abbreviations or explanatory comments.
+    </div>
+  </div>
+
+  <div class="excerpt-card">
+    <div class="excerpt-title">Excerpt 3: Small Focused Methods</div>
+    <div class="code-box">// In src/Shape.java
+public void setImplementation(Renderer renderer) {
+    if (renderer == null) {
+        throw new IllegalArgumentException("Renderer cannot be null");
+    }
+    this.renderer = renderer;
+}</div>
+    <div class="benefit">
+      <strong>Benefit:</strong> The method is concise (6 lines), performs one atomic task with guard validation, has no side effects, and is trivial to test.
+    </div>
+  </div>
+
+  <div class="excerpt-card">
+    <div class="excerpt-title">Excerpt 4: Avoidance of Duplication (DRY Principle)</div>
+    <div class="code-box">// In src/Shape.java
+public abstract class Shape {
+    protected final String id;
+    protected Renderer renderer;
+
+    public Shape(String id, Renderer renderer) {
+        this.id = id;
+        this.renderer = renderer;
+    }
+}</div>
+    <div class="benefit">
+      <strong>Benefit:</strong> Common attributes (<code>id</code>, <code>renderer</code>) and implementation-swapping logic are centralized in the abstract base class rather than duplicated across <code>Circle</code> and <code>Square</code>.
+    </div>
+  </div>
+
+  <div class="excerpt-card">
+    <div class="excerpt-title">Excerpt 5: Encapsulation of State</div>
+    <div class="code-box">// In src/Circle.java
+public class Circle extends Shape {
+    private final int radius;
+    // ...
+    public int getRadius() {
+        return radius;
+    }
+}</div>
+    <div class="benefit">
+      <strong>Benefit:</strong> Field <code>radius</code> is <code>private final</code>, preserving internal invariants from unauthorized mutation. External classes can only inspect it via <code>getRadius()</code>.
+    </div>
+  </div>
+
+  <h2>4. Independent Extension (I3) &amp; Open/Closed Principle</h2>
+  <p>
+    In Section 4, a third renderer (<code>AsciiRenderer</code>) was introduced to demonstrate independent extensibility:
+  </p>
+  <ul>
+    <li><strong>What was added:</strong> New source <code>src/AsciiRenderer.java</code> implementing <code>Renderer</code>, plus test cases T6 and T7 in <code>Main.java</code> and its entry in <code>sources.txt</code>.</li>
+    <li><strong>What remained unchanged:</strong> The base class <code>Shape</code>, subclasses <code>Circle</code> and <code>Square</code>, interface <code>Renderer</code>, and initial implementations <code>VectorRenderer</code> and <code>RasterRenderer</code> remained completely unmodified.</li>
+  </ul>
+  <p>
+    This demonstrates the <strong>Open/Closed Principle (OCP)</strong>: the architecture is open for extension but closed for modification. This was formally verified using <code>git diff BASE_COMMIT HEAD -- src &gt; extension.diff</code>, showing that existing domain classes have zero diff.
+  </p>
+
+  <!-- ==================== PAGE 3 ==================== -->
+  <div class="page-break"></div>
+
+  <h2>5. Trade-offs &amp; Comparison with Adapter Pattern</h2>
+
+  <h3>Specific Trade-off of the Bridge Pattern</h3>
+  <p>
+    The primary trade-off of Bridge is <strong>increased architectural complexity and indirection</strong>. Introducing separate interfaces and delegation layers requires more classes and indirect method calls. In simpler applications with only a single implementation that will never change, Bridge introduces unnecessary overhead.
+  </p>
+
+  <h3>Comparative Analysis: Bridge vs. Adapter</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Dimension</th>
+        <th style="width: 40%;">Bridge Pattern</th>
+        <th style="width: 40%;">Adapter Pattern</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Primary Intent</strong></td>
+        <td>Decouples an abstraction from its implementation so both vary independently.</td>
+        <td>Converts an incompatible interface of an existing class into a target interface expected by clients.</td>
+      </tr>
+      <tr>
+        <td><strong>Design Phase</strong></td>
+        <td>Designed <em>up-front</em> during system architecture before classes are implemented.</td>
+        <td>Applied <em>after the fact (retrospectively)</em> to integrate legacy or third-party classes.</td>
+      </tr>
+      <tr>
+        <td><strong>Structure</strong></td>
+        <td>Two parallel, independent class hierarchies connected via an interface reference.</td>
+        <td>A single wrapper class adapting an existing adaptee to a target client interface.</td>
+      </tr>
+      <tr>
+        <td><strong>Relationship</strong></td>
+        <td>Collaboration between an Abstraction and an Implementor interface.</td>
+        <td>Translation layer between two otherwise incompatible interfaces.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>6. Test Verification &amp; Demonstration Outcomes (T1–T7)</h2>
+  <p>
+    All checks T1–T7 are dynamically verified by executing <code>java -cp out Main --demo</code>:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Check</th>
+        <th>Scenario / Configuration</th>
+        <th>Expected Output</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>T1</strong></td>
+        <td>A1 with I1 (Circle + VectorRenderer)</td>
+        <td><code>result=VECTOR circle radius=2</code></td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>T2</strong></td>
+        <td>A1 with I2 (Circle + RasterRenderer)</td>
+        <td><code>result=RASTER circle radius=2</code></td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>T3</strong></td>
+        <td>A2 with I1 (Square + VectorRenderer)</td>
+        <td><code>result=VECTOR square side=3</code></td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>T4</strong></td>
+        <td>A2 with I2 (Square + RasterRenderer)</td>
+        <td><code>result=RASTER square side=3</code></td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>T5</strong></td>
+        <td>Runtime switch on single Circle object (I1 &rarr; I2)</td>
+        <td><code>sameObject=true | stateUnchanged=true</code><br><code>before=VECTOR circle radius=2 | after=RASTER circle radius=2</code></td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>T6</strong></td>
+        <td>A1 with I3 (Circle + AsciiRenderer)</td>
+        <td><code>result=ASCII circle radius=2</code></td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>T7</strong></td>
+        <td>A2 with I3 (Square + AsciiRenderer)</td>
+        <td><code>result=ASCII square side=3</code></td>
+        <td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-weight: 700; color: #166534; margin: 3px 0 6px 0;">
+    Computed Summary: 7/7 PASS (All tests executed and verified successfully)
+  </p>
+
+  <h3>Runtime Switching Verification (T5 Proof)</h3>
+  <p>
+    Check T5 explicitly verifies three critical assertions:
+  </p>
+  <ol>
+    <li><strong>Reference Identity:</strong> <code>refBefore == refAfter</code> evaluates to <code>true</code>, proving the underlying <code>Circle</code> instance is identical.</li>
+    <li><strong>Domain State Invariance:</strong> <code>id</code> ("c-switch") and <code>radius</code> (2) remain completely unchanged before and after the replacement.</li>
+    <li><strong>Behavioral Update:</strong> The initial execution produces <code>"VECTOR circle radius=2"</code>; after invoking <code>setImplementation(new RasterRenderer())</code>, the exact same object immediately outputs <code>"RASTER circle radius=2"</code>.</li>
+  </ol>
+
+  <h2>7. References &amp; Academic Citations</h2>
+  <ol>
+    <li>Gamma, E., Helm, R., Johnson, R., &amp; Vlissides, J. (1994). <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Addison-Wesley Professional. (Bridge Pattern, pp. 151–161; Adapter Pattern, pp. 139–150).</li>
+    <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall. (Chapters 2, 3, 6, and 10).</li>
+    <li>Bekenov, Y. (2026). <em>Lecture 4: Bridge Pattern</em>. Astana IT University, School of Software Engineering, Course ShP-2216.</li>
+  </ol>
+
+</body>
+</html>
