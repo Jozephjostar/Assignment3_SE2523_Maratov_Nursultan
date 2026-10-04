@@ -1,133 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" width="100%" height="auto" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 370" width="100%" height="auto" style="background:#ffffff; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
   <defs>
-    <!-- Arrow marker for inheritance (white hollow triangle) -->
-    <marker id="inheritance" markerWidth="14" markerHeight="14" refX="14" refY="7" orient="auto">
-      <polygon points="0 0, 14 7, 0 14" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" />
+    <!-- Hollow triangle for generalization (inheritance) -->
+    <marker id="inheritance" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#ffffff" stroke="#334155" stroke-width="1.5" />
     </marker>
-    <!-- Arrow marker for realization (dashed with white triangle) -->
-    <marker id="realization" markerWidth="14" markerHeight="14" refX="14" refY="7" orient="auto">
-      <polygon points="0 0, 14 7, 0 14" fill="#ffffff" stroke="#059669" stroke-width="1.5" />
+    <!-- Hollow triangle for realization (interface implementation) -->
+    <marker id="realization" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto">
+      <polygon points="0 0, 12 6, 0 12" fill="#ffffff" stroke="#334155" stroke-width="1.5" />
     </marker>
-    <!-- Arrow marker for directed association / dependency -->
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-      <polygon points="0 1, 9 5, 0 9" fill="#1e293b" />
+    <!-- Standard open arrow for association -->
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <polygon points="0 1, 8 4.5, 0 8" fill="#334155" />
     </marker>
-    <marker id="dep-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+    <!-- Dashed dependency arrow -->
+    <marker id="dep" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
       <polygon points="0 1, 7 4, 0 7" fill="#64748b" />
-    </marker>
-    <!-- Diamond marker for composition/aggregation -->
-    <marker id="diamond" markerWidth="16" markerHeight="12" refX="0" refY="6" orient="auto">
-      <polygon points="0 6, 8 1, 16 6, 8 11" fill="#1e293b" stroke="#1e293b" stroke-width="1" />
     </marker>
   </defs>
 
-  <!-- Title / Legend Bar -->
-  <rect x="15" y="10" width="950" height="36" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
-  <text x="30" y="33" font-size="14" font-weight="bold" fill="#0f172a">Bridge Pattern UML Class Diagram — Option A (Drawing)</text>
-  <text x="680" y="33" font-size="12" fill="#64748b">Astana IT University | SE-2523 | Nursultan Maratov</text>
-
-  <!-- Client Box: Main -->
-  <g transform="translate(15, 65)">
-    <rect width="165" height="100" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" />
-    <path d="M 0 30 L 165 30" stroke="#cbd5e1" stroke-width="1" />
-    <text x="82" y="21" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Main</text>
-    <text x="10" y="50" font-size="11" fill="#475569">+ main(args: String[]): void</text>
-    <text x="10" y="70" font-size="11" fill="#475569">+ runDemo(): void</text>
-    <text x="10" y="90" font-size="10" font-style="italic" fill="#64748b">«Client / Test Runner»</text>
+  <!-- ================= Client: Main ================= -->
+  <g transform="translate(20, 45)">
+    <rect width="135" height="75" rx="3" fill="#ffffff" stroke="#334155" stroke-width="1.5" />
+    <text x="67" y="24" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Main</text>
+    <line x1="0" y1="34" x2="135" y2="34" stroke="#cbd5e1" stroke-width="1" />
+    <text x="8" y="52" font-size="10" fill="#334155">+ main(args: String[])</text>
+    <text x="8" y="68" font-size="10" fill="#334155">+ runDemo(): void</text>
   </g>
 
-  <!-- Abstraction Box: Shape -->
-  <g transform="translate(225, 65)">
-    <rect width="255" height="150" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" />
-    <path d="M 0 36 L 255 36" stroke="#bfdbfe" stroke-width="1" />
-    <path d="M 0 74 L 255 74" stroke="#bfdbfe" stroke-width="1" />
-    <text x="127" y="18" font-size="10" font-style="italic" fill="#2563eb" text-anchor="middle">&lt;&lt;abstract&gt;&gt;</text>
-    <text x="127" y="32" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Shape</text>
-    <text x="12" y="52" font-size="11" fill="#334155"># id: String</text>
-    <text x="12" y="68" font-size="11" fill="#334155"># renderer: Renderer</text>
-    <text x="12" y="92" font-size="11" fill="#334155">+ Shape(id: String, r: Renderer)</text>
-    <text x="12" y="108" font-size="11" fill="#334155">+ setImplementation(r: Renderer): void</text>
-    <text x="12" y="124" font-size="11" fill="#334155">+ getId(): String</text>
-    <text x="12" y="140" font-size="11" font-style="italic" font-weight="bold" fill="#1d4ed8">+ {abstract} execute(): String</text>
+  <!-- ================= Abstraction: Shape ================= -->
+  <g transform="translate(205, 30)">
+    <rect width="245" height="135" rx="3" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5" />
+    <text x="122" y="20" font-size="10" font-style="italic" fill="#2563eb" text-anchor="middle">&lt;&lt;abstract&gt;&gt;</text>
+    <text x="122" y="34" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Shape</text>
+    <line x1="0" y1="42" x2="245" y2="42" stroke="#93c5fd" stroke-width="1" />
+    <text x="10" y="58" font-size="10.5" fill="#334155"># id: String</text>
+    <text x="10" y="73" font-size="10.5" fill="#334155"># renderer: Renderer</text>
+    <line x1="0" y1="81" x2="245" y2="81" stroke="#93c5fd" stroke-width="1" />
+    <text x="10" y="97" font-size="10" fill="#334155">+ Shape(id: String, r: Renderer)</text>
+    <text x="10" y="112" font-size="10" fill="#334155">+ setImplementation(r: Renderer)</text>
+    <text x="10" y="127" font-size="10" font-style="italic" font-weight="bold" fill="#1d4ed8">+ {abstract} execute(): String</text>
   </g>
 
-  <!-- Implementor Interface Box: Renderer -->
-  <g transform="translate(560, 65)">
-    <rect width="270" height="105" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.5" />
-    <path d="M 0 36 L 270 36" stroke="#a7f3d0" stroke-width="1" />
-    <text x="135" y="18" font-size="10" font-style="italic" fill="#059669" text-anchor="middle">&lt;&lt;interface&gt;&gt;</text>
-    <text x="135" y="32" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">Renderer</text>
-    <text x="12" y="58" font-size="11" fill="#065f46">+ renderCircle(radius: int): String</text>
-    <text x="12" y="78" font-size="11" fill="#065f46">+ renderSquare(side: int): String</text>
-    <text x="12" y="96" font-size="10" font-style="italic" fill="#047857">«Implementor Interface»</text>
+  <!-- ================= Implementor: Renderer ================= -->
+  <g transform="translate(530, 45)">
+    <rect width="260" height="95" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1.5" />
+    <text x="130" y="20" font-size="10" font-style="italic" fill="#059669" text-anchor="middle">&lt;&lt;interface&gt;&gt;</text>
+    <text x="130" y="34" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">Renderer</text>
+    <line x1="0" y1="42" x2="260" y2="42" stroke="#6ee7b7" stroke-width="1" />
+    <text x="10" y="62" font-size="10.5" fill="#065f46">+ renderCircle(radius: int): String</text>
+    <text x="10" y="80" font-size="10.5" fill="#065f46">+ renderSquare(side: int): String</text>
   </g>
 
-  <!-- Bridge Association Line: Shape -> Renderer -->
-  <line x1="480" y1="115" x2="558" y2="115" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)" marker-start="url(#diamond)" />
-  <text x="520" y="107" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">renderer</text>
-  <text x="520" y="132" font-size="10" fill="#64748b" text-anchor="middle">&lt;&lt;Bridge&gt;&gt;</text>
+  <!-- Association Bridge: Shape -> Renderer -->
+  <line x1="450" y1="92" x2="528" y2="92" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow)" />
+  <text x="489" y="84" font-size="10" font-weight="bold" fill="#334155" text-anchor="middle">- renderer</text>
 
-  <!-- Client dependency to Shape and Renderer -->
-  <path d="M 180 115 L 223 115" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#dep-arrow)" />
+  <!-- Dependency: Main -> Shape -->
+  <line x1="155" y1="82" x2="203" y2="82" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#dep)" />
 
-  <!-- Refined Abstractions: Circle and Square -->
-  <g transform="translate(205, 275)">
-    <rect width="140" height="120" rx="6" fill="#f8fafc" stroke="#2563eb" stroke-width="1.2" />
-    <path d="M 0 30 L 140 30" stroke="#bfdbfe" stroke-width="1" />
-    <path d="M 0 54 L 140 54" stroke="#bfdbfe" stroke-width="1" />
-    <text x="70" y="21" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Circle (A1)</text>
-    <text x="10" y="46" font-size="11" fill="#334155">- radius: int</text>
-    <text x="10" y="70" font-size="10" fill="#334155">+ Circle(id, r, radius)</text>
-    <text x="10" y="86" font-size="10" fill="#334155">+ getRadius(): int</text>
-    <text x="10" y="106" font-size="10" font-weight="bold" fill="#1d4ed8">+ execute(): String</text>
+  <!-- ================= Refined Abstractions: Circle & Square ================= -->
+  <g transform="translate(205, 235)">
+    <rect width="115" height="90" rx="3" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" />
+    <text x="57" y="22" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Circle</text>
+    <line x1="0" y1="32" x2="115" y2="32" stroke="#93c5fd" stroke-width="1" />
+    <text x="8" y="48" font-size="10" fill="#334155">- radius: int</text>
+    <line x1="0" y1="56" x2="115" y2="56" stroke="#93c5fd" stroke-width="1" />
+    <text x="8" y="72" font-size="9.5" fill="#334155">+ Circle(id, r, radius)</text>
+    <text x="8" y="86" font-size="9.5" font-weight="bold" fill="#1d4ed8">+ execute(): String</text>
   </g>
 
-  <g transform="translate(365, 275)">
-    <rect width="140" height="120" rx="6" fill="#f8fafc" stroke="#2563eb" stroke-width="1.2" />
-    <path d="M 0 30 L 140 30" stroke="#bfdbfe" stroke-width="1" />
-    <path d="M 0 54 L 140 54" stroke="#bfdbfe" stroke-width="1" />
-    <text x="70" y="21" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Square (A2)</text>
-    <text x="10" y="46" font-size="11" fill="#334155">- side: int</text>
-    <text x="10" y="70" font-size="10" fill="#334155">+ Square(id, r, side)</text>
-    <text x="10" y="86" font-size="10" fill="#334155">+ getSide(): int</text>
-    <text x="10" y="106" font-size="10" font-weight="bold" fill="#1d4ed8">+ execute(): String</text>
+  <g transform="translate(335, 235)">
+    <rect width="115" height="90" rx="3" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" />
+    <text x="57" y="22" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Square</text>
+    <line x1="0" y1="32" x2="115" y2="32" stroke="#93c5fd" stroke-width="1" />
+    <text x="8" y="48" font-size="10" fill="#334155">- side: int</text>
+    <line x1="0" y1="56" x2="115" y2="56" stroke="#93c5fd" stroke-width="1" />
+    <text x="8" y="72" font-size="9.5" fill="#334155">+ Square(id, r, side)</text>
+    <text x="8" y="86" font-size="9.5" font-weight="bold" fill="#1d4ed8">+ execute(): String</text>
   </g>
 
   <!-- Inheritance lines from Circle and Square up to Shape -->
-  <path d="M 275 275 L 275 235 L 352 235 L 352 217" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#inheritance)" />
-  <path d="M 435 275 L 435 235 L 352 235" stroke="#2563eb" stroke-width="1.5" fill="none" />
+  <path d="M 262 235 L 262 200 L 327 200 L 327 167" stroke="#334155" stroke-width="1.5" fill="none" marker-end="url(#inheritance)" />
+  <path d="M 392 235 L 392 200 L 327 200" stroke="#334155" stroke-width="1.5" fill="none" />
 
-  <!-- Concrete Implementors: VectorRenderer (I1), RasterRenderer (I2), AsciiRenderer (I3) -->
-  <g transform="translate(540, 275)">
-    <rect width="130" height="105" rx="6" fill="#f8fafc" stroke="#059669" stroke-width="1.2" />
-    <path d="M 0 30 L 130 30" stroke="#cbd5e1" stroke-width="1" />
-    <text x="65" y="16" font-size="11" font-weight="bold" fill="#047857" text-anchor="middle">VectorRenderer</text>
-    <text x="65" y="27" font-size="9" fill="#059669" text-anchor="middle">(I1)</text>
-    <text x="6" y="52" font-size="10" fill="#334155">+ renderCircle(): Str</text>
-    <text x="6" y="72" font-size="10" fill="#334155">+ renderSquare(): Str</text>
+  <!-- ================= Concrete Implementors: Vector, Raster, Ascii ================= -->
+  <g transform="translate(490, 235)">
+    <rect width="115" height="90" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
+    <text x="57" y="22" font-size="11" font-weight="bold" fill="#065f46" text-anchor="middle">VectorRenderer</text>
+    <line x1="0" y1="32" x2="115" y2="32" stroke="#6ee7b7" stroke-width="1" />
+    <text x="6" y="52" font-size="9" fill="#334155">+ renderCircle(r)</text>
+    <text x="6" y="72" font-size="9" fill="#334155">+ renderSquare(s)</text>
   </g>
 
-  <g transform="translate(685, 275)">
-    <rect width="130" height="105" rx="6" fill="#f8fafc" stroke="#059669" stroke-width="1.2" />
-    <path d="M 0 30 L 130 30" stroke="#cbd5e1" stroke-width="1" />
-    <text x="65" y="16" font-size="11" font-weight="bold" fill="#047857" text-anchor="middle">RasterRenderer</text>
-    <text x="65" y="27" font-size="9" fill="#059669" text-anchor="middle">(I2)</text>
-    <text x="6" y="52" font-size="10" fill="#334155">+ renderCircle(): Str</text>
-    <text x="6" y="72" font-size="10" fill="#334155">+ renderSquare(): Str</text>
+  <g transform="translate(615, 235)">
+    <rect width="115" height="90" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
+    <text x="57" y="22" font-size="11" font-weight="bold" fill="#065f46" text-anchor="middle">RasterRenderer</text>
+    <line x1="0" y1="32" x2="115" y2="32" stroke="#6ee7b7" stroke-width="1" />
+    <text x="6" y="52" font-size="9" fill="#334155">+ renderCircle(r)</text>
+    <text x="6" y="72" font-size="9" fill="#334155">+ renderSquare(s)</text>
   </g>
 
-  <g transform="translate(830, 275)">
-    <rect width="135" height="105" rx="6" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,2" />
-    <path d="M 0 30 L 135 30" stroke="#fef08a" stroke-width="1" />
-    <text x="67" y="16" font-size="11" font-weight="bold" fill="#a16207" text-anchor="middle">AsciiRenderer</text>
-    <text x="67" y="27" font-size="9" fill="#ca8a04" text-anchor="middle">(I3 Extension)</text>
-    <text x="6" y="52" font-size="10" fill="#334155">+ renderCircle(): Str</text>
-    <text x="6" y="72" font-size="10" fill="#334155">+ renderSquare(): Str</text>
+  <g transform="translate(740, 235)">
+    <rect width="115" height="90" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
+    <text x="57" y="22" font-size="11" font-weight="bold" fill="#065f46" text-anchor="middle">AsciiRenderer</text>
+    <line x1="0" y1="32" x2="115" y2="32" stroke="#6ee7b7" stroke-width="1" />
+    <text x="6" y="52" font-size="9" fill="#334155">+ renderCircle(r)</text>
+    <text x="6" y="72" font-size="9" fill="#334155">+ renderSquare(s)</text>
   </g>
 
-  <!-- Realization lines from I1, I2, I3 up to Renderer -->
-  <path d="M 605 275 L 605 210 L 695 210 L 695 172" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#realization)" />
-  <path d="M 750 275 L 750 210" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3" fill="none" />
-  <path d="M 897 275 L 897 210 L 695 210" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,3" fill="none" />
+  <!-- Realization lines up to Renderer -->
+  <path d="M 547 235 L 547 180 L 660 180 L 660 142" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3" fill="none" marker-end="url(#realization)" />
+  <path d="M 672 235 L 672 180" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3" fill="none" />
+  <path d="M 797 235 L 797 180 L 660 180" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3" fill="none" />
 
 </svg>
